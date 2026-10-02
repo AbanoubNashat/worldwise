@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
 import Product from "./pages/Product";
@@ -40,15 +40,13 @@ function App() {
         <Routes>
           {/* index means it's the default value for the routing */}
           <Route index element={<Homepage></Homepage>}></Route>
-          <Route path="/pricing" element={<Pricing></Pricing>}></Route>
-          <Route path="/product" element={<Product></Product>}></Route>
-          <Route path="/login" element={<Login></Login>}></Route>
-          <Route path="/app" element={<AppLayout></AppLayout>}>
+          <Route path="pricing" element={<Pricing></Pricing>}></Route>
+          <Route path="product" element={<Product></Product>}></Route>
+          <Route path="login" element={<Login></Login>}></Route>
+          <Route path="app" element={<AppLayout></AppLayout>}>
             <Route
               index
-              element={
-                <CityList cities={cities} isLoading={isLoading}></CityList>
-              }
+              element={<Navigate replace to={"cities"}></Navigate>}
             ></Route>
             <Route
               path="cities"
