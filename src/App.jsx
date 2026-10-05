@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
@@ -11,64 +10,36 @@ import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
-
-const BASE_URL = "http://localhost:9000";
+import { CitiesProvider } from "./contexts/CitiesProvider";
 
 function App() {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(function () {
-    async function fetchCities() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
-        setCities(data);
-      } catch (error) {
-        alert("There is an error fetching movies");
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchCities();
-  }, []);
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          {/* index means it's the default value for the routing */}
-          <Route index element={<Homepage></Homepage>}></Route>
-          <Route path="pricing" element={<Pricing></Pricing>}></Route>
-          <Route path="product" element={<Product></Product>}></Route>
-          <Route path="login" element={<Login></Login>}></Route>
-          <Route path="app" element={<AppLayout></AppLayout>}>
-            <Route
-              index
-              element={<Navigate replace to={"cities"}></Navigate>}
-            ></Route>
-            <Route
-              path="cities"
-              element={
-                <CityList cities={cities} isLoading={isLoading}></CityList>
-              }
-            ></Route>
-            <Route path="cities/:id" element={<City></City>}></Route>
-            <Route
-              path="countries"
-              element={
-                <CountryList
-                  cities={cities}
-                  isLoading={isLoading}
-                ></CountryList>
-              }
-            ></Route>
-            <Route path="form" element={<Form></Form>}></Route>
-          </Route>
-          <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
-        </Routes>
-      </BrowserRouter>
+      <CitiesProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* index means it's the default value for the routing */}
+            <Route index element={<Homepage></Homepage>}></Route>
+            <Route path="pricing" element={<Pricing></Pricing>}></Route>
+            <Route path="product" element={<Product></Product>}></Route>
+            <Route path="login" element={<Login></Login>}></Route>
+            <Route path="app" element={<AppLayout></AppLayout>}>
+              <Route
+                index
+                element={<Navigate replace to={"cities"}></Navigate>}
+              ></Route>
+              <Route path="cities" element={<CityList></CityList>}></Route>
+              <Route path="cities/:id" element={<City></City>}></Route>
+              <Route
+                path="countries"
+                element={<CountryList></CountryList>}
+              ></Route>
+              <Route path="form" element={<Form></Form>}></Route>
+            </Route>
+            <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
+          </Routes>
+        </BrowserRouter>
+      </CitiesProvider>
     </div>
   );
 }

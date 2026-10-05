@@ -2,8 +2,10 @@ import styles from "./CityList.module.css";
 import Spinner from "./Spinner";
 import Message from "./Message";
 import CityItem from "./CityItem";
+import { useCitiesContext } from "../contexts/CitiesContext";
 
-function CityList({ cities, isLoading }) {
+function CityList() {
+  const { cities, isLoading } = useCitiesContext();
   if (isLoading) {
     return <Spinner></Spinner>;
   }
@@ -15,7 +17,9 @@ function CityList({ cities, isLoading }) {
 
   return (
     <ul className={styles.cityList}>
-      {cities.map((city) => <CityItem city={city} key={city.id}></CityItem>)}
+      {cities.map((city) => (
+        <CityItem city={city} key={city.id}></CityItem>
+      ))}
     </ul>
   );
 }
