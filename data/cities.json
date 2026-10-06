@@ -35,30 +35,6 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
-    },
-    {
-      "cityName": "Marseille",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2026-10-06T10:34:22.917Z",
-      "notes": "test",
-      "position": {
-        "lat": "43.27720532212024",
-        "lng": "5.361328125"
-      },
-      "id": 98443198
-    },
-    {
-      "cityName": "Bouc-Bel-Air",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2026-10-06T10:35:04.622Z",
-      "notes": "test",
-      "position": {
-        "lat": "43.43970817417449",
-        "lng": "5.415401458740234"
-      },
-      "id": 98443199
     }
   ]
 }
